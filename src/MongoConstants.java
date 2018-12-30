@@ -1,3 +1,5 @@
+// todo delete class. Used in Mongo logic
+@Deprecated
 public class MongoConstants {
 
     public static final String MONGO_URI = "mongodb://admin:Gp13kost@cluster0-shard-00-00-p7xcy.mongodb.net:27017," +

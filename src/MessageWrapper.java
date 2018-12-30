@@ -2,6 +2,8 @@ import org.bson.Document;
 
 import java.util.Date;
 
+// todo delete class. Used in Mongo logic
+@Deprecated
 public class MessageWrapper {
     public Integer  id;
     public String   name;

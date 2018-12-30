@@ -13,6 +13,8 @@ import java.io.File;
 import java.io.*;
 import java.nio.ByteBuffer;
 
+// todo delete this unused class
+@Deprecated
 @ServerEndpoint(value = "/chat")
 public class ChatServer {
 
@@ -29,7 +31,7 @@ public class ChatServer {
     public void onOpen(Session session) throws IOException, ClassNotFoundException {
         // todo init mysql connection here
         allSessions.add(session);
-        MySQLService.testConnToMySQL();
+//        MySQLService.testConnToMySQL();
 //        session.setMaxBinaryMessageBufferSize(1000000);
         WebSocketHelper.logNewConnection(session);
 //        sentLatestMessagesToCurrentUser(session);
@@ -70,7 +72,7 @@ public class ChatServer {
             }
         } else if (chat.state.equals("Init User")) {
 
-            onlineUsers.put(session, MongoService.initUser(chat));
+//            onlineUsers.put(session, MongoService.initUser(chat));
 
         } else if (chat.state.equals("End File")) {
 
@@ -84,14 +86,14 @@ public class ChatServer {
         } else if (chat.state.equals("File")) {
 
             chat.filePath                   = uploadedFile.getPath();
-            AutorizationResponse response   = MongoService.saveMsgInDatabase(chat);
+            AutorizationResponse response   = null;
 
             sendMessageToAllClients(session, chat);
             System.out.println(onlineUsers);
         } else if (chat.state.equals("File Request")) {
-            session.getBasicRemote().sendText(gson.toJson(MongoService.getFileInfo(chat)));
+//            session.getBasicRemote().sendText(gson.toJson(MongoService.getFileInfo(chat)));
         } else {
-            AutorizationResponse response = MongoService.saveMsgInDatabase(chat);
+//            AutorizationResponse response = MongoService.saveMsgInDatabase(chat);
             sendMessageToAllClients(session, chat);
         }
     }
@@ -124,7 +126,7 @@ public class ChatServer {
     }
 
     private void sentLatestMessagesToCurrentUser(Session session) throws IOException {
-        session.getBasicRemote().sendText(gson.toJson(MongoService.getLatestMessages()));
+//        session.getBasicRemote().sendText(gson.toJson(MongoService.getLatestMessages()));
     }
 
     public class ChatWrapper {
