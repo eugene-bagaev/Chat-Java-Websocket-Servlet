@@ -6,6 +6,8 @@ import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 import com.google.gson.*;
 
+// todo delete this class
+@Deprecated
 @ServerEndpoint(value = "/registration")
 public class RegistrationController {
 
@@ -14,6 +16,7 @@ public class RegistrationController {
     @OnOpen
     public void onOpen(Session session) {
         WebSocketHelper.logNewConnection(session);
+        System.out.println("Reg user conn");
     }
 
     @OnMessage
@@ -21,9 +24,12 @@ public class RegistrationController {
         WebSocketHelper.logNewMessageFromClient(message, session);
 
         RegistrationWrapper request     = gson.fromJson(message, RegistrationWrapper.class);
-        AutorizationResponse response   = null;
 
-        return gson.toJson(response);
+        System.out.println(request);
+
+//        RegistrationResponse response   = MySQLService.verifyRegistrationAndRegister(request);
+
+        return null;
     }
 
     @OnClose
@@ -37,8 +43,14 @@ public class RegistrationController {
     }
 
     public class RegistrationWrapper {
-        public String username;
+        public String login;
         public String password;
         public String email;
+        public String firstName;
+        public String lastName;
+
+        public String toString() {
+            return "[login="+login+";pass="+password+";email="+email+";fName="+firstName+";lName="+lastName+"]";
+        }
     }
 }

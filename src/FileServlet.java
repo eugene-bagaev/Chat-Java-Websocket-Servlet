@@ -30,7 +30,6 @@ public class FileServlet extends HttpServlet {
         response.addHeader("Content-Disposition","attachment;filename="+fileName);
 
         File f      = new File(filePath + "/" + fileName);
-        System.out.println(f);
         long len    = f.length();
 
         response.addHeader("Content-Length", String.valueOf(len));

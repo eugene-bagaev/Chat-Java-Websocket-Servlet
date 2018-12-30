@@ -4,11 +4,15 @@ import java.util.logging.Logger;
 
 public class WebSocketHelper {
 
+    public static final String TYPE_REGISTRATION    = "reg";
+    public static final String TYPE_LOGIN           = "login";
+    public static final String TYPE_CHAT            = "chat";
+
     private static final Logger LOGGER = Logger.getLogger(WebSocketHelper.class.getName());
 
     public static void logNewConnection(Session session) {
         LOGGER.log(
-                Level.FINE,
+                Level.INFO,
                 "New connection with client: {0}",
                 session.getId()
         );
@@ -36,7 +40,6 @@ public class WebSocketHelper {
                 "Error for the client: {0}. With msg: {1}",
                 new Object[] { session.getId(), exception.getMessage() }
         );
-        exception.printStackTrace();
     }
 
 }
