@@ -1,3 +1,5 @@
+import com.google.gson.Gson;
+
 import javax.websocket.Session;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -7,8 +9,11 @@ public class WebSocketHelper {
     public static final String TYPE_REGISTRATION    = "reg";
     public static final String TYPE_LOGIN           = "login";
     public static final String TYPE_CHAT            = "chat";
+    public static final String TYEP_INIT_USER       = "inituser";
 
     private static final Logger LOGGER = Logger.getLogger(WebSocketHelper.class.getName());
+
+    public static final Gson gson = new Gson();
 
     public static void logNewConnection(Session session) {
         LOGGER.log(
