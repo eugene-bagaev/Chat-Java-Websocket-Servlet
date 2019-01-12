@@ -21,7 +21,7 @@
         console.log('Connection Success');
         body.innerText = 'Connected to Websocket';
     };
-    
+
 
   </script>
 </html>

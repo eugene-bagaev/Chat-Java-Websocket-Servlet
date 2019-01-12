@@ -171,6 +171,32 @@ public class MySQLService {
         return response;
     }
 
+    public static User getUserInfoById(Integer id) {
+        User user;
+        String query = "SELECT * FROM User WHERE Id = \'" + id + "\'";
+
+        try {
+            ResultSet result = stmt.executeQuery(query);
+            if (result.next()) {
+
+                user = new User(
+                        result.getString(MySQLConstants.USER_LOGIN),
+                        result.getString(MySQLConstants.USER_EMAIL),
+                        result.getString(MySQLConstants.USER_NAME),
+                        id
+                );
+
+            } else {
+                user = null;
+            }
+        } catch (SQLException e) {
+            user = null;
+            System.out.println(e.getMessage());
+        }
+
+        return user;
+    }
+
     private static String getMessageById(Integer recordId) {
         String query = "SELECT * FROM Message JOIN User " +
                 "WHERE Message.UserId = User.Id " +
